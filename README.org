@@ -2,4 +2,4 @@
 Coreutils In Rust, Again
 * Abstract
 what follows is the 9001^{st} rewriting of posix coreutils in the rust programming language.
-no further description is, as of now, needed
+No further description is, as of now, needed
