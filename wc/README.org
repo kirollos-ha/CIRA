@@ -1,0 +1,12 @@
+#+title: WC
+
+** TODO
+the implementation is currently at the end of, though still inside, the "at least it works" stage, with much cleaning, refactoring, and testing required, the following are thus to be done in the near future
+ - format the output according to the provided display flags
+ - add proper error reporting for "no such file or directory"
+ - add tests / redesign/refactor for testability 
+ - documentation
+ - clean up monolith
+ - make the modularity clearer by
+   - extracting the file reading abstractions/wrappers in a separate module (or crate, since any eventual cat/grep/et al. will likely use the same abstractions)
+   - extracting the counting and arg parsing functionality in separate modules

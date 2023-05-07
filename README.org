@@ -1,0 +1,5 @@
+#+title: CIRA
+Coreutils In Rust, Again
+* Abstract
+what follows is the \(2^{2^2{2^{2^{2^{\dots}}}}}\) rewriting of posix coreutils in the rust programming language.
+no further description is, as of now, needed
