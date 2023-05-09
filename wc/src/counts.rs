@@ -2,6 +2,7 @@
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
+use std::iter::Iterator; /* per all_files_count */
 
 /* "adapted" from rust by example */
 fn read_lines<P : AsRef<Path>>(filename: P)
@@ -9,6 +10,26 @@ fn read_lines<P : AsRef<Path>>(filename: P)
 {
     let file = File::open(filename)?;
     Ok(io::BufReader::new(file).lines())
+}
+
+pub fn all_files_counts<T:Iterator<Item=String>> (files:T) -> Counts {
+    let mut res = Counts::all_zeros();
+    for file_name in files {
+	let file_counts = match Counts::single_file(&file_name) {
+	    Ok(counts) => counts,
+	    Err(problem) => {
+		println!("skipping count for file : {}, {}", file_name, problem);
+		continue
+	    }
+	};
+
+	/* TODO implement Add trait for Counts */
+	res.files += 1;
+	res.chars += file_counts.chars;
+	res.words += file_counts.words;
+	res.lines += file_counts.lines;
+    }
+    res
 }
 
 

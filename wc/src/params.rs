@@ -3,20 +3,20 @@
  * an iterator over some of its members
  * so
  */
-use std::slice::Iter;
-use std::iter::Skip;
+// use std::slice::Iter;
+// use std::iter::Skip;
 
 use crate::display;
 use crate::display::Flags as DisplayFlags;
 
 #[derive(Debug)]
-pub struct Parameters<'a> {
+pub struct Parameters {
     pub display_flags : DisplayFlags,
-    pub files : Skip<Iter<'a,String>>
+    pub files : Vec<String>,
 }
 
-impl Parameters<'_> {
-    pub fn parse_argv(argv:&Vec<String>) -> Result<Parameters ,&str> {
+impl Parameters {
+    pub fn parse_argv(mut argv: Vec<String>) -> Result<Parameters ,&'static str> {
 	if argv.len() < 2 {
 	    return Err("not enough arguments");
 	}
@@ -29,8 +29,8 @@ impl Parameters<'_> {
 		else { DisplayFlags::default() }
 	    },
 	    files : {
-		if gave_flags { argv.iter().skip(2).into_iter() }
-		else { argv.iter().skip(1).into_iter() }
+		if gave_flags { argv.split_off(2) }
+		else { argv.split_off(1) }
 	    },
 	})
     }
